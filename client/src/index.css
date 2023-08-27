@@ -1,13 +1,76 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --primary: #110edb;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  background-color: #eeeeee;
+  margin: 0;
+  box-sizing: content-box;
 }
+
+/* header */
+header {
+  background-color: white;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 5%;
+}
+
+header button {
+  border: none;
+  background-color: var(--primary);
+  width: 130px;
+  height: 40px;
+  color: white;
+  border-radius: 7px;
+}
+/* create task bar  */
+
+.create-task-bar {
+  background-color: white;
+  min-height: 70px;
+  width: 70%;
+  margin: auto;
+  margin-top: 20px;
+  padding: 20px 25px;
+}
+
+/* task list */
+
+.task-list {
+  background-color: white;
+  width: 70%;
+  margin: auto;
+  margin-top: 20px;
+  padding: 20px 15px;
+}
+
+.task-list h3 {
+  margin: 0px;
+  /* padding-left: 10px; */
+}
+
+.task-list ul {
+  padding-left: 0px;
+}
+
+.task-list li {
+  list-style-type: none;
+  /* border: 1px solid rgb(184, 184, 184); */
+  border-radius: 10px;
+  padding: 15px 10px;
+  box-shadow: 0px 0px 1px rgb(173, 172, 172);
+}
+
+.task-list .task-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-list h4 {
+  margin: 0px;
+}
+/* task page */
