@@ -1,0 +1,7 @@
+version: 1
+services:
+  - name: straitpay
+    buildCommand: npm install && npm run build # Build your app
+    startCommand: npm start # Start your app
+    env: # Environment variables
+      NODE_ENV: production
