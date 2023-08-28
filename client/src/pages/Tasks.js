@@ -7,8 +7,10 @@ const Tasks = () => {
   return (
     <div>
       <Header />
-      {/* <CreateTask /> */}
-      <TaskList />
+      <div className="task-content">
+        <CreateTask />
+        <TaskList />
+      </div>
     </div>
   );
 };

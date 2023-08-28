@@ -1,11 +1,21 @@
 import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <header>
-      <h1>StraitPay</h1>
+      <h1
+        onClick={(e) => {
+          e.preventDefault();
+          navigate("/");
+        }}
+      >
+        StraitPay
+      </h1>
 
-      <button>Create Task</button>
+      <button>Todo App</button>
     </header>
   );
 };

@@ -8,16 +8,20 @@ class HttpService {
   getData = async (url) => {
     return axios.get(this.baseUrl);
   };
+  getDataById = async (id) => {
+    return axios.get(this.baseUrl + "/" + id);
+  };
 
-  postData = async (payload, url) => {
+  editDataById = async (payload, id) => {
+    return axios.put(this.baseUrl + "/" + id, payload);
+  };
+  postData = async (payload) => {
     return axios.post(`${this.baseUrl}`, payload);
   };
 
-  deleteData = async (url) => {
+  deleteData = async (id) => {
     const AuthStr = "Bearer ".concat(this.token);
-    return axios.delete(this.baseUrl + url, {
-      headers: { Authorization: AuthStr },
-    });
+    return axios.delete(this.baseUrl + "/" + id);
   };
 }
 export default HttpService;

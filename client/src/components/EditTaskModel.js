@@ -1,35 +1,67 @@
 import React, { lazy, useEffect, useState } from "react";
-import { createTasksService } from "../services/taskServices";
+import { editTaskService, viewTaskService } from "../services/taskServices";
 import TextField from "@mui/material/TextField";
-
-const CreateTask = () => {
+import { useParams } from "react-router-dom";
+const EditTaskModel = () => {
+  const { id } = useParams();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [status, setStatus] = useState(true);
+
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
   const [response, setResponse] = useState("success");
+  const [task, setTask] = useState([]);
+  const [loader, setLoader] = useState(true);
 
-  let createTask = () => {
+  useEffect(() => {
+    setLoader(true);
+
+    viewTaskService(id)
+      .then((res) => {
+        console.log("response", res);
+        if (res.status) {
+          setTask(res.data);
+          setResponseMessage("Task updated");
+          setResponse("success");
+        } else {
+          setResponseMessage(res.msg);
+          setResponse("failed");
+        }
+        setTitle(res.data.title);
+        setDescription(res.data.description);
+
+        setLoader(false);
+      })
+      .catch((err) => {
+        console.log("response", err);
+        setLoader(false);
+        setResponseMessage("An error occured");
+        setResponse("failed");
+      });
+  }, []);
+
+  let editTask = () => {
     setLoading(true);
     let payload = {
       title: title,
       description: description,
-      isCompleted: false,
+      isCompleted: status,
     };
 
     console.log("payload", payload);
 
-    createTasksService(payload)
+    editTaskService(payload, id)
       .then((res) => {
         setLoading(false);
         console.log("response", res);
-        if (res.status) {
-          setResponse("success");
-          setResponseMessage(res.msg);
-        } else {
-          setResponse("failed");
-          setResponseMessage(res.msg);
-        }
+        // if (res.status) {
+        //   setResponse("success");
+        //   setResponseMessage(res.msg);
+        // } else {
+        //   setResponse("failed");
+        //   setResponseMessage(res.msg);
+        // }
         // setTimeout(() => {
         //   window.location.reload();
         // }, 5);
@@ -43,21 +75,33 @@ const CreateTask = () => {
   return (
     <section className="create-task-bar">
       <form>
-        <h1>Create a task</h1>
+        <h1>Edit task</h1>
         <div className="input-container">
           <input
             type="text"
             name="title"
             value={title}
             placeholder="Title"
-            required
             onChange={(e) => {
               e.preventDefault();
               setTitle(e.target.value);
             }}
           />
         </div>
-
+        <div className="status-dropdown">
+          {" "}
+          <label htmlFor="Title">Is completed?</label>
+          <select
+            onChange={(e) => {
+              e.preventDefault();
+              console.log(e);
+              setStatus(e.target.value);
+            }}
+          >
+            <option value={true}>True</option>
+            <option value={false}>False</option>
+          </select>
+        </div>
         {/* <div>
           <label htmlFor="Title">Status</label>
 
@@ -93,21 +137,19 @@ const CreateTask = () => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            createTask();
+            editTask();
+            console.log("hello");
           }}
         >
           {loading ? (
             <img src="./images/load.gif" alt="loader" className="loader" />
           ) : (
-            "Submit"
+            "Edit"
           )}
         </button>
       </form>
-      {/* <div className="quotes">
-        <h1>Make Hay while teh sun shines</h1>
-      </div> */}
     </section>
   );
 };
 
-export default CreateTask;
+export default EditTaskModel;
