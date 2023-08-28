@@ -26,7 +26,7 @@ const getTasks = async (req, res) => {
       return res.json({
         status: true,
         msg: "No task created yet",
-        data: [],
+        data: []``,
       });
     }
     res.json({
