@@ -38,7 +38,7 @@ export const editTaskService = async (payload, id) => {
   try {
     const res = await http.editDataById(payload, id);
 
-    return res;
+    return res.data;
   } catch (err) {
     console.log(err);
   }

@@ -9,6 +9,8 @@ const EditTaskModel = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState(false);
+  const [defaultStatus, setDefaultStatus] = useState(false);
+
   const [inputValidator, setInputValidator] = useState("");
 
   const [loading, setLoading] = useState(false);
@@ -32,6 +34,7 @@ const EditTaskModel = () => {
         setTitle(res.data.title);
         setDescription(res.data.description);
         setStatus(res.data.isCompleted);
+        setDefaultStatus(res.data.isCompleted);
         setLoader(false);
       })
       .catch((err) => {
@@ -71,7 +74,7 @@ const EditTaskModel = () => {
           }
           setTimeout(() => {
             window.location.reload();
-          }, 2000);
+          }, 1000);
         })
         .catch((err) => {
           setLoading(false);
@@ -108,10 +111,10 @@ const EditTaskModel = () => {
               setStatus(e.target.value);
             }}
           >
-            <option value={status}>{String(status)}</option>
+            <option value={status}>{String(defaultStatus)}</option>
             {console.log(status)}
 
-            <option value={!status}>{String(!status)}</option>
+            <option value={!status}>{String(!defaultStatus)}</option>
           </select>
         </div>
         {/* <div>
@@ -140,7 +143,7 @@ const EditTaskModel = () => {
           <div
             className="reponse"
             style={{
-              backgroundColor: response === "success" ? "#137a61" : "#b34747",
+              color: response === "success" ? "#137a61" : "#b34747",
             }}
           >
             {responseMessage}
@@ -156,7 +159,7 @@ const EditTaskModel = () => {
           {loading ? (
             <img src="../images/load.gif" alt="loader" className="loader" />
           ) : (
-            "Edit"
+            "Update"
           )}
         </button>
       </form>

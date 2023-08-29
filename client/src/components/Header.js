@@ -12,7 +12,7 @@ const Header = () => {
           navigate("/");
         }}
       >
-        StraitPay
+        Strait<span>Pay</span>{" "}
       </h1>
 
       <button>Todo App</button>

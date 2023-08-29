@@ -47,7 +47,7 @@ const TaskList = () => {
         }
         setTimeout(() => {
           window.location.reload();
-        }, 5000);
+        }, 3000);
       })
       .catch((err) => {
         setLoader(false);
@@ -61,7 +61,7 @@ const TaskList = () => {
     <section className="task-list">
       <h3>Tasks</h3>
       {message && (
-        <p className="delete" style={{ textAlign: "center" }}>
+        <p className="delete" style={{ textAlign: "center", margin: "0px" }}>
           {message}
         </p>
       )}
@@ -77,7 +77,7 @@ const TaskList = () => {
                       className="status"
                       style={{
                         backgroundColor: each.isCompleted
-                          ? "#137a61"
+                          ? "#b93a8f"
                           : "#919493",
                       }}
                     >
@@ -92,7 +92,7 @@ const TaskList = () => {
                         navigate(`/view/${each._id}`);
                       }}
                     >
-                      View
+                      <img src="./images/eye.svg" />
                     </button>
                     <button
                       onClick={(e) => {
@@ -100,7 +100,7 @@ const TaskList = () => {
                         navigate(`/view/${each._id}`);
                       }}
                     >
-                      Edit
+                      <img src="./images/edit.svg" />
                     </button>
                     <button
                       className="delete"
@@ -109,11 +109,11 @@ const TaskList = () => {
                         deleteTask(each._id);
                       }}
                     >
-                      delete
+                      <img src="./images/delete.svg" />
                     </button>
                   </div>
                 </div>
-                <p>{each.description}</p>
+                {/* <p>{each.description}</p> */}
               </li>
             );
           })}
@@ -127,7 +127,7 @@ const TaskList = () => {
       {tasks.length == 0 && loader === false && (
         <div className="null">
           <img src="./images/null.jpeg" alt="" />
-          <p>No Task added</p>
+          <p style={{ color: "black" }}>No Task added</p>
         </div>
       )}
     </section>

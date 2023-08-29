@@ -70,30 +70,37 @@ const TaskContent = () => {
                 <button
                   className="status"
                   style={{
-                    backgroundColor: task.isCompleted ? "#137a61" : "#919493",
+                    backgroundColor: task.isCompleted ? "#b93a8f" : "#919493",
                   }}
                 >
                   {task.isCompleted ? "Completed" : "Uncompleted"}
                 </button>
               </div>
 
-              <div className="taskn-button-actio">
+              <div className="task-button-action">
                 <button
                   onClick={() => {
                     deleteTask(task._id);
                   }}
                   className="delete"
                 >
-                  delete
+                  <img src="../images/delete.svg" />
                 </button>
               </div>
             </div>
-            <p>{task.description}</p>
+            <p className="description">
+              <span>Description:</span>{" "}
+              <span className="more-desc">{task.description}</span>
+            </p>
           </li>
         </ul>
       )}
 
-      {loader && <TaskSkeleton />}
+      {loader && (
+        <div className="null">
+          <img src="../images/loader.gif" alt="" />
+        </div>
+      )}
     </section>
   );
 };

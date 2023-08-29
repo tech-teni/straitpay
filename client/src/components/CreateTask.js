@@ -97,7 +97,7 @@ const CreateTask = () => {
           <div
             className="reponse"
             style={{
-              backgroundColor: response === "success" ? "#137a61" : "#b34747",
+              color: response === "success" ? "#137a61" : "#b34747",
             }}
           >
             {responseMessage}
