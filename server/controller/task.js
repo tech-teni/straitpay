@@ -22,7 +22,9 @@ const createTask = async (req, res) => {
 const getTasks = async (req, res) => {
   try {
     const tasks = await TaskModel.find();
-    if (tasks.length < 1) {
+    console.log(tasks);
+
+    if (tasks.length === 0) {
       return res.json({
         status: true,
         msg: "No task created yet",
@@ -34,7 +36,9 @@ const getTasks = async (req, res) => {
       msg: "successfuly fetch all task",
       data: tasks,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const getTaskById = async (req, res) => {
