@@ -10,8 +10,6 @@ const TaskList = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.pathname);
-
   const [tasks, setTasks] = useState([]);
   const [loader, setLoader] = useState(true);
   const [message, setMessage] = useState("");
@@ -21,14 +19,12 @@ const TaskList = () => {
 
     getTasksService()
       .then((res) => {
-        console.log("response", res);
         if (res.status) {
           setTasks(res.data);
         }
         setLoader(false);
       })
       .catch((err) => {
-        console.log("response", err);
         setLoader(false);
       });
   }, []);
@@ -39,7 +35,6 @@ const TaskList = () => {
     deleteTaskService(id)
       .then((res) => {
         setLoader(false);
-        console.log("del", res);
         if (res.status) {
           setMessage(res.msg);
         } else {
@@ -52,8 +47,6 @@ const TaskList = () => {
       .catch((err) => {
         setLoader(false);
         setMessage("An error occur");
-
-        console.log("response", err);
       });
   };
 

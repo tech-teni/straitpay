@@ -17,7 +17,6 @@ const CreateTask = () => {
       isCompleted: false,
     };
 
-    console.log("payload", payload);
     if (description === "") {
       setInputValidator("Description must not be empty");
     }
@@ -30,7 +29,6 @@ const CreateTask = () => {
       createTasksService(payload)
         .then((res) => {
           setLoading(false);
-          console.log("response", res);
           if (res.status) {
             setResponse("success");
             setResponseMessage(res.msg);
@@ -44,8 +42,6 @@ const CreateTask = () => {
         })
         .catch((err) => {
           setLoading(false);
-
-          console.log("response", err);
         });
     }
   };

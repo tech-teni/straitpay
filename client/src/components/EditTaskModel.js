@@ -24,7 +24,6 @@ const EditTaskModel = () => {
 
     viewTaskService(id)
       .then((res) => {
-        console.log("response", res);
         // if (res.status) {
         //   setTask(res.data);
         // } else {
@@ -38,7 +37,6 @@ const EditTaskModel = () => {
         setLoader(false);
       })
       .catch((err) => {
-        console.log("response", err);
         setLoader(false);
         setResponseMessage("An error occured");
         setResponse("failed");
@@ -57,14 +55,12 @@ const EditTaskModel = () => {
     if (title === "") {
       setInputValidator("Title must not be empty");
     }
-    console.log("payload", payload);
     if (title && description) {
       setLoading(true);
 
       editTaskService(payload, id)
         .then((res) => {
           setLoading(false);
-          console.log("response", res);
           if (res.status) {
             setResponse("success");
             setResponseMessage(res.msg);
@@ -78,8 +74,6 @@ const EditTaskModel = () => {
         })
         .catch((err) => {
           setLoading(false);
-
-          console.log("response", err);
         });
     }
   };
@@ -107,12 +101,10 @@ const EditTaskModel = () => {
           <select
             onChange={(e) => {
               e.preventDefault();
-              console.log(e);
               setStatus(e.target.value);
             }}
           >
             <option value={status}>{String(defaultStatus)}</option>
-            {console.log(status)}
 
             <option value={!status}>{String(!defaultStatus)}</option>
           </select>
@@ -153,7 +145,6 @@ const EditTaskModel = () => {
           onClick={(e) => {
             e.preventDefault();
             editTask();
-            console.log("hello");
           }}
         >
           {loading ? (
