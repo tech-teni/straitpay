@@ -1,6 +1,6 @@
 # straitpay
 Frontend live link:  https://straitpay-todo-app.netlify.app 
-Backend api endpoint: https://straitpay-todo-app.netlify.app
+Backend api endpoint: https://api-straitpay-task-app.onrender.com/
 
 
 Getting Started: Follow these instructions to get the Straitpay Todo application up and running on your local machine.
