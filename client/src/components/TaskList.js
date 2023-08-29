@@ -5,6 +5,7 @@ import {
   viewTaskService,
 } from "../services/taskServices";
 import { useNavigate, useLocation } from "react-router-dom";
+
 const TaskList = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -13,6 +14,7 @@ const TaskList = () => {
 
   const [tasks, setTasks] = useState([]);
   const [loader, setLoader] = useState(true);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     setLoader(true);
@@ -37,20 +39,19 @@ const TaskList = () => {
     deleteTaskService(id)
       .then((res) => {
         setLoader(false);
-        console.log("response", res);
-        // if (res.status) {
-        //   setResponse("success");
-        //   setResponseMessage(res.msg);
-        // } else {
-        //   setResponse("failed");
-        //   setResponseMessage(res.msg);
-        // }
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 5);
+        console.log("del", res);
+        if (res.status) {
+          setMessage(res.msg);
+        } else {
+          setMessage(res.msg);
+        }
+        setTimeout(() => {
+          window.location.reload();
+        }, 5000);
       })
       .catch((err) => {
         setLoader(false);
+        setMessage("An error occur");
 
         console.log("response", err);
       });
@@ -59,9 +60,13 @@ const TaskList = () => {
   return (
     <section className="task-list">
       <h3>Tasks</h3>
-
+      {message && (
+        <p className="delete" style={{ textAlign: "center" }}>
+          {message}
+        </p>
+      )}
       <ul>
-        {tasks &&
+        {tasks.length > 0 &&
           tasks.map((each) => {
             return (
               <li key={each._id}>
@@ -80,7 +85,7 @@ const TaskList = () => {
                     </button>
                   </div>
 
-                  <div className="taskn-button-actio">
+                  <div className="task-button-action">
                     <button
                       onClick={(e) => {
                         e.preventDefault();
@@ -98,6 +103,7 @@ const TaskList = () => {
                       Edit
                     </button>
                     <button
+                      className="delete"
                       onClick={(e) => {
                         e.preventDefault();
                         deleteTask(each._id);
@@ -112,8 +118,18 @@ const TaskList = () => {
             );
           })}
       </ul>
+      {loader && (
+        <div className="null">
+          <img src="./images/loader.gif" alt="" />
+        </div>
+      )}
 
-      {tasks === false && <img src="" alt="" />}
+      {tasks.length == 0 && loader === false && (
+        <div className="null">
+          <img src="./images/null.jpeg" alt="" />
+          <p>No Task added</p>
+        </div>
+      )}
     </section>
   );
 };

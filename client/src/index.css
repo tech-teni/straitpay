@@ -65,6 +65,10 @@ header button {
   margin: 0px;
   color: var(--pencil);
 }
+.create-task-bar p {
+  margin: 0px;
+  color: var(--failed);
+}
 .create-task-bar input,
 .create-task-bar select {
   height: 40px;
@@ -157,12 +161,21 @@ header button {
   color: white;
 }
 
-.task-action-button {
+.task-button-action {
   /* width: 30%; */
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1px;
   justify-content: flex-start;
+}
+
+.task-button-action button {
+  color: #3e3e3f;
+}
+
+.delete {
+  color: var(--failed) !important ;
+  text-transform: capitalize;
 }
 .task-list h4 {
   margin: 0px;
@@ -191,3 +204,15 @@ header button {
   min-height: 280px;
   width: 100%;
 }
+
+.null {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .null img {
+  width: 400px;
+  height: 300px;
+} */

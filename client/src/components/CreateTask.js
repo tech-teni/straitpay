@@ -8,9 +8,9 @@ const CreateTask = () => {
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
   const [response, setResponse] = useState("success");
+  const [inputValidator, setInputValidator] = useState("");
 
   let createTask = () => {
-    setLoading(true);
     let payload = {
       title: title,
       description: description,
@@ -18,32 +18,42 @@ const CreateTask = () => {
     };
 
     console.log("payload", payload);
+    if (description === "") {
+      setInputValidator("Description must not be empty");
+    }
+    if (title === "") {
+      setInputValidator("Title must not be empty");
+    }
 
-    createTasksService(payload)
-      .then((res) => {
-        setLoading(false);
-        console.log("response", res);
-        if (res.status) {
-          setResponse("success");
-          setResponseMessage(res.msg);
-        } else {
-          setResponse("failed");
-          setResponseMessage(res.msg);
-        }
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 5);
-      })
-      .catch((err) => {
-        setLoading(false);
+    if (title && description) {
+      setLoading(true);
+      createTasksService(payload)
+        .then((res) => {
+          setLoading(false);
+          console.log("response", res);
+          if (res.status) {
+            setResponse("success");
+            setResponseMessage(res.msg);
+          } else {
+            setResponse("failed");
+            setResponseMessage(res.msg);
+          }
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        })
+        .catch((err) => {
+          setLoading(false);
 
-        console.log("response", err);
-      });
+          console.log("response", err);
+        });
+    }
   };
   return (
     <section className="create-task-bar">
       <form>
         <h1>Create a task</h1>
+        {inputValidator && <p>{inputValidator}</p>}
         <div className="input-container">
           <input
             type="text"
@@ -54,6 +64,7 @@ const CreateTask = () => {
             onChange={(e) => {
               e.preventDefault();
               setTitle(e.target.value);
+              setInputValidator("");
             }}
           />
         </div>
@@ -75,6 +86,8 @@ const CreateTask = () => {
             value={description}
             onChange={(e) => {
               e.preventDefault();
+              setInputValidator("");
+
               setDescription(e.target.value);
             }}
           ></textarea>

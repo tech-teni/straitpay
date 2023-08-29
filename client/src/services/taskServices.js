@@ -49,7 +49,7 @@ export const deleteTaskService = async (id) => {
   try {
     const res = await http.deleteData(id);
 
-    return res;
+    return res.data;
   } catch (err) {
     console.log(err);
   }

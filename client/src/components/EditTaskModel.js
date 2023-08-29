@@ -2,11 +2,14 @@ import React, { lazy, useEffect, useState } from "react";
 import { editTaskService, viewTaskService } from "../services/taskServices";
 import TextField from "@mui/material/TextField";
 import { useParams } from "react-router-dom";
+import Skeleton from "@mui/material/Skeleton";
+
 const EditTaskModel = () => {
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState(true);
+  const [status, setStatus] = useState(false);
+  const [inputValidator, setInputValidator] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
@@ -20,17 +23,15 @@ const EditTaskModel = () => {
     viewTaskService(id)
       .then((res) => {
         console.log("response", res);
-        if (res.status) {
-          setTask(res.data);
-          setResponseMessage("Task updated");
-          setResponse("success");
-        } else {
-          setResponseMessage(res.msg);
-          setResponse("failed");
-        }
+        // if (res.status) {
+        //   setTask(res.data);
+        // } else {
+        //   setResponseMessage(res.msg);
+        //   setResponse("failed");
+        // }
         setTitle(res.data.title);
         setDescription(res.data.description);
-
+        setStatus(res.data.isCompleted);
         setLoader(false);
       })
       .catch((err) => {
@@ -42,40 +43,49 @@ const EditTaskModel = () => {
   }, []);
 
   let editTask = () => {
-    setLoading(true);
     let payload = {
       title: title,
       description: description,
       isCompleted: status,
     };
-
+    if (description === "") {
+      setInputValidator("Description must not be empty");
+    }
+    if (title === "") {
+      setInputValidator("Title must not be empty");
+    }
     console.log("payload", payload);
+    if (title && description) {
+      setLoading(true);
 
-    editTaskService(payload, id)
-      .then((res) => {
-        setLoading(false);
-        console.log("response", res);
-        // if (res.status) {
-        //   setResponse("success");
-        //   setResponseMessage(res.msg);
-        // } else {
-        //   setResponse("failed");
-        //   setResponseMessage(res.msg);
-        // }
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 5);
-      })
-      .catch((err) => {
-        setLoading(false);
+      editTaskService(payload, id)
+        .then((res) => {
+          setLoading(false);
+          console.log("response", res);
+          if (res.status) {
+            setResponse("success");
+            setResponseMessage(res.msg);
+          } else {
+            setResponse("failed");
+            setResponseMessage(res.msg);
+          }
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        })
+        .catch((err) => {
+          setLoading(false);
 
-        console.log("response", err);
-      });
+          console.log("response", err);
+        });
+    }
   };
   return (
     <section className="create-task-bar">
       <form>
         <h1>Edit task</h1>
+        {inputValidator && <p>{inputValidator}</p>}
+
         <div className="input-container">
           <input
             type="text"
@@ -98,8 +108,10 @@ const EditTaskModel = () => {
               setStatus(e.target.value);
             }}
           >
-            <option value={true}>True</option>
-            <option value={false}>False</option>
+            <option value={status}>{String(status)}</option>
+            {console.log(status)}
+
+            <option value={!status}>{String(!status)}</option>
           </select>
         </div>
         {/* <div>
@@ -142,7 +154,7 @@ const EditTaskModel = () => {
           }}
         >
           {loading ? (
-            <img src="./images/load.gif" alt="loader" className="loader" />
+            <img src="../images/load.gif" alt="loader" className="loader" />
           ) : (
             "Edit"
           )}
