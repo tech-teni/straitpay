@@ -9,6 +9,7 @@ Installation:
 
 Clone the repository to your local machine: git clone https://github.com/tech-teni/straitpay.git
 
+##
 #RUNNING THE FRONTEND (CLIENT) SIDE
 - Navigate to the 'client' folder (to run the frontend) : cd client
 - Install the necessary packages using npm: npm install
