@@ -1,7 +1,7 @@
 # straitpay
+Frontend live link:  https://straitpay-todo-app.netlify.app 
 
-
-Getting Started: Follow these instructions to get the Straitpay application up and running on your local machine.
+Getting Started: Follow these instructions to get the Straitpay Todo application up and running on your local machine.
 
 Installation:
 
