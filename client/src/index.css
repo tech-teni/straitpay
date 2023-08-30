@@ -313,8 +313,29 @@ header button {
   .task-button-action button img {
     width: 16px;
   }
+}
 
+@media screen and (max-width: 428px) {
+  .task-list li .status {
+    font-size: 10px;
+    width: 72px;
+    height: 20px;
+    text-align: center;
+  }
+  .create-task-bar form {
+    /* max-width: 00px; */
+    width: 90%;
+    padding: 20px;
+  }
+  .task-info {
+    justify-content: space-around;
+  }
   .task-list .task-title {
-    width: inherit;
+    width: 72%;
+  }
+
+  .task-list .task-title h4 {
+    width: 60%;
+    overflow-x: hidden;
   }
 }
