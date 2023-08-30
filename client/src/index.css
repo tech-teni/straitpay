@@ -253,6 +253,9 @@ header button {
 
 /* media screen  */
 @media screen and (max-width: 1024px) {
+  body {
+    min-height: 100vh;
+  }
   .task-content {
     flex-direction: column;
     justify-content: center;
@@ -283,7 +286,7 @@ header button {
 
   .task-list li .status {
     font-size: 10px;
-    width: 70px;
+    width: 72px;
     height: 20px;
   }
   .create-task-bar form {
