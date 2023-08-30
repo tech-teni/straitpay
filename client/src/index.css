@@ -313,4 +313,8 @@ header button {
   .task-button-action button img {
     width: 16px;
   }
+
+  .task-list .task-title {
+    width: inherit;
+  }
 }
