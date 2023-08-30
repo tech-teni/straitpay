@@ -319,6 +319,7 @@ header button {
   .task-list li .status {
     font-size: 10px;
     width: 72px;
+    padding: 0px 3px;
     height: 20px;
     text-align: center;
   }
