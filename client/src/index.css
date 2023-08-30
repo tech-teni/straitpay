@@ -288,6 +288,7 @@ header button {
     font-size: 10px;
     width: 72px;
     height: 20px;
+    text-align: center;
   }
   .create-task-bar form {
     /* max-width: 00px; */
